@@ -19,22 +19,31 @@ npm install
 npm run dev
 ```
 
-## Écrire avec Decap CMS (en local)
+Le site est alors sur http://localhost:4321/astro-du8test/.
 
-Decap CMS sert d'interface de rédaction, **uniquement sur ta machine** : il n'y a
-aucun serveur ni connexion en ligne. Il écrit directement les fichiers Markdown
-dans `src/content/`, que tu publies ensuite avec un commit et un push.
+## Écrire des articles avec Sveltia CMS
 
-```bash
-docker compose up
-```
+L'interface de rédaction est [Sveltia CMS](https://github.com/sveltia/sveltia-cms),
+compatible avec la configuration Decap. Elle ne demande **aucun serveur**.
+Sa configuration est dans `public/admin/config.yml`.
 
-Puis ouvre http://localhost:4321/astro-du8test/admin/index.html.
+### En ligne
 
-- `site` lance `astro dev` (Node 24), `cms` lance `decap-server` sur le port 8081.
-- Sans Docker, avec Node 24 : `npm run dev` et `npm run cms` dans deux terminaux.
-- La configuration des champs est dans `public/admin/config.yml`.
-- `/admin` est retiré du build : il n'existe pas sur le site publié.
+1. Ouvre https://julienchenel.github.io/astro-du8test/admin/
+2. Choisis **Sign In with Token** et colle un jeton d'accès personnel GitHub :
+   un *fine-grained token* limité au dépôt `astro-du8test`, avec la permission
+   **Contents : Read and write**.
+3. Chaque enregistrement crée un commit sur `main`, ce qui republie le site
+   en une à deux minutes.
+
+Le jeton reste dans ton navigateur. Ne le partage pas et donne-lui une date d'expiration.
+
+### En local
+
+Avec `npm run dev` lancé, ouvre http://localhost:4321/astro-du8test/admin/index.html
+dans Chrome ou Edge, choisis **Work with Local Repository** et sélectionne le
+dossier du projet. Les fichiers sont modifiés directement sur le disque ;
+publie-les ensuite avec un commit et un push.
 
 ## Déploiement
 

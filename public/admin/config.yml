@@ -1,13 +1,21 @@
-# Decap CMS en mode local uniquement : il écrit directement dans les fichiers
-# du dépôt via `decap-server` (port 8081). Aucun serveur ni connexion en ligne.
-# Le bloc `backend` est requis par Decap mais ne sert pas tant que
-# `local_backend` est actif et que l'admin est ouvert sur localhost.
+# Sveltia CMS (compatible Decap) — aucun serveur nécessaire.
+# - En ligne : connexion avec un jeton d'accès personnel GitHub
+#   (« Sign In with Token »), les articles sont commités sur `main`,
+#   ce qui relance le déploiement GitHub Pages.
+# - En local (localhost) : « Work with Local Repository » édite directement
+#   les fichiers du dossier du projet (Chrome ou Edge).
 backend:
   name: github
   repo: julienchenel/astro-du8test
   branch: main
+  commit_messages:
+    create: 'Créer {{collection}} « {{slug}} »'
+    update: 'Modifier {{collection}} « {{slug}} »'
+    delete: 'Supprimer {{collection}} « {{slug}} »'
+    uploadMedia: 'Ajouter le média « {{path}} »'
+    deleteMedia: 'Supprimer le média « {{path}} »'
 
-local_backend: true
+site_url: https://julienchenel.github.io/astro-du8test/
 
 locale: fr
 
