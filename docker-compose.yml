@@ -1,0 +1,32 @@
+# Rédaction en local : site Astro (http://localhost:4321/astro-du8test/)
+# + Decap CMS (http://localhost:4321/astro-du8test/admin/index.html).
+# Lancer avec : docker compose up
+services:
+  site:
+    image: node:24-alpine
+    working_dir: /app
+    user: '${UID:-1000}:${GID:-1000}'
+    environment:
+      HOME: /tmp
+    volumes:
+      - .:/app
+    command: sh -c "npm install --no-fund && npx astro dev --host 0.0.0.0"
+    ports:
+      - '4321:4321'
+
+  cms:
+    image: node:24-alpine
+    working_dir: /app
+    user: '${UID:-1000}:${GID:-1000}'
+    environment:
+      HOME: /tmp
+      # Le serveur Decap n'a pas d'authentification : il écoute dans le
+      # conteneur, mais le port n'est publié que sur la machine locale.
+      BIND_HOST: 0.0.0.0
+    volumes:
+      - .:/app
+    depends_on:
+      - site
+    command: npx decap-server
+    ports:
+      - '127.0.0.1:8081:8081'

@@ -19,6 +19,23 @@ npm install
 npm run dev
 ```
 
+## Écrire avec Decap CMS (en local)
+
+Decap CMS sert d'interface de rédaction, **uniquement sur ta machine** : il n'y a
+aucun serveur ni connexion en ligne. Il écrit directement les fichiers Markdown
+dans `src/content/`, que tu publies ensuite avec un commit et un push.
+
+```bash
+docker compose up
+```
+
+Puis ouvre http://localhost:4321/astro-du8test/admin/index.html.
+
+- `site` lance `astro dev` (Node 24), `cms` lance `decap-server` sur le port 8081.
+- Sans Docker, avec Node 24 : `npm run dev` et `npm run cms` dans deux terminaux.
+- La configuration des champs est dans `public/admin/config.yml`.
+- `/admin` est retiré du build : il n'existe pas sur le site publié.
+
 ## Déploiement
 
 Chaque push sur `main` lance `.github/workflows/deploy.yml`, qui build le site et le publie sur GitHub Pages.
