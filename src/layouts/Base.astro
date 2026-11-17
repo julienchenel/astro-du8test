@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { lien } from '../utils';
+
+interface Props {
+  titre: string;
+  description?: string;
+}
+
+const { titre, description = 'Un blog sur le kayak : technique, itinéraires, matériel et bivouac.' } = Astro.props;
+const chemin = Astro.url.pathname.slice(import.meta.env.BASE_URL.replace(/\/$/, '').length) || '/';
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{titre === 'Au fil de la pagaie' ? titre : `${titre} · Au fil de la pagaie`}</title>
+  </head>
+  <body>
+    <header class="entete">
+      <div class="conteneur barre">
+        <a href={lien('/')} class="logo">Au fil de la pagaie</a>
+        <nav>
+          <a href={lien('/')} aria-current={chemin === '/' ? 'page' : undefined}>Articles</a>
+          <a href={lien('/auteurs/')} aria-current={chemin.startsWith('/auteurs') ? 'page' : undefined}>Auteurs</a>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="pied">
+      <div class="conteneur">Au fil de la pagaie · un blog de kayakistes</div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .entete { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .barre { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 16px; flex-wrap: wrap; }
+  .logo { font-weight: 800; font-size: 1.2rem; color: var(--text); text-decoration: none; }
+  nav { display: flex; gap: 20px; }
+  nav a { color: var(--muted); text-decoration: none; font-weight: 500; }
+  nav a[aria-current='page'], nav a:hover { color: var(--accent); }
+  main { padding-block: 40px; }
+  .pied { border-top: 1px solid var(--border); padding-block: 24px; color: var(--muted); font-size: 0.9rem; }
+</style>

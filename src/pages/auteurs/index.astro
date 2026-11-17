@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { initiales, lien } from '../../utils';
+
+const auteurs = await getCollection('auteurs');
+const articles = await getCollection('articles');
+const nbArticles = (id: string) => articles.filter((a) => a.data.auteur.id === id).length;
+---
+
+<Base titre="Auteurs">
+  <div class="conteneur">
+    <h1>Les auteurs</h1>
+    <ul class="grille">
+      {
+        auteurs.map((auteur) => (
+          <li class="carte">
+            <span class="avatar">{initiales(auteur.data.nom)}</span>
+            <h2><a href={lien(`/auteurs/${auteur.id}/`)}>{auteur.data.nom}</a></h2>
+            <p class="meta">{auteur.data.role} · {auteur.data.ville}</p>
+            <p>{auteur.data.bio}</p>
+            <p class="meta">{nbArticles(auteur.id)} article{nbArticles(auteur.id) > 1 ? 's' : ''}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .carte {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  h2 { margin: 8px 0 0; font-size: 1.2rem; }
+  h2 a { color: var(--text); text-decoration: none; }
+  h2 a:hover { color: var(--accent); }
+  p { margin: 0; }
+</style>

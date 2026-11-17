@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CarteArticle from '../../components/CarteArticle.astro';
+import { articlesTries, initiales } from '../../utils';
+
+export async function getStaticPaths() {
+  const auteurs = await getCollection('auteurs');
+  return auteurs.map((auteur) => ({ params: { id: auteur.id }, props: { auteur } }));
+}
+
+const { auteur } = Astro.props;
+const { Content } = await render(auteur);
+const articles = (await articlesTries()).filter((a) => a.data.auteur.id === auteur.id);
+---
+
+<Base titre={auteur.data.nom} description={auteur.data.bio}>
+  <div class="conteneur">
+    <section class="profil">
+      <span class="avatar grand">{initiales(auteur.data.nom)}</span>
+      <div>
+        <h1>{auteur.data.nom}</h1>
+        <p class="meta">{auteur.data.role} · {auteur.data.ville} · {auteur.data.pratique}</p>
+        <div class="presentation"><Content /></div>
+      </div>
+    </section>
+    <h2>Ses articles</h2>
+    <ul class="grille">
+      {articles.map((article) => <CarteArticle article={article} />)}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .profil { display: flex; gap: 24px; align-items: flex-start; margin-bottom: 40px; flex-wrap: wrap; }
+  .profil > div { flex: 1; min-width: 240px; }
+  h1 { margin: 0 0 4px; }
+  .presentation { max-width: 640px; }
+</style>

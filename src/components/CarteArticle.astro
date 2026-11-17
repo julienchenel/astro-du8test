@@ -1,0 +1,37 @@
+---
+import { getEntry, type CollectionEntry } from 'astro:content';
+import { dateLongue, lien } from '../utils';
+
+interface Props {
+  article: CollectionEntry<'articles'>;
+}
+
+const { article } = Astro.props;
+const auteur = await getEntry(article.data.auteur);
+---
+
+<li class="carte">
+  <ul class="tags">{article.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+  <h3><a href={lien(`/articles/${article.id}/`)}>{article.data.titre}</a></h3>
+  <p>{article.data.resume}</p>
+  <p class="meta">
+    <a href={lien(`/auteurs/${auteur.id}/`)}>{auteur.data.nom}</a> · {dateLongue(article.data.date)} · {article.data.dureeLecture} min
+  </p>
+</li>
+
+<style>
+  .carte {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  h3 { margin: 4px 0 0; font-size: 1.15rem; }
+  h3 a { color: var(--text); text-decoration: none; }
+  h3 a:hover { color: var(--accent); }
+  p { margin: 0; }
+  .meta { margin-top: auto; }
+</style>

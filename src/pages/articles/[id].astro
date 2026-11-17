@@ -1,0 +1,54 @@
+---
+import { getCollection, getEntry, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { dateLongue, initiales, lien } from '../../utils';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({ params: { id: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const auteur = await getEntry(article.data.auteur);
+const { Content } = await render(article);
+---
+
+<Base titre={article.data.titre} description={article.data.resume}>
+  <article class="conteneur etroit">
+    <ul class="tags">{article.data.tags.map((tag) => <li>{tag}</li>)}</ul>
+    <h1>{article.data.titre}</h1>
+    <p class="chapo">{article.data.resume}</p>
+    <p class="meta">
+      Par <a href={lien(`/auteurs/${auteur.id}/`)}>{auteur.data.nom}</a> · {dateLongue(article.data.date)} · {article.data.dureeLecture} min de lecture
+    </p>
+    <div class="corps">
+      <Content />
+    </div>
+    <aside class="encart">
+      <span class="avatar">{initiales(auteur.data.nom)}</span>
+      <div>
+        <p class="nom"><a href={lien(`/auteurs/${auteur.id}/`)}>{auteur.data.nom}</a></p>
+        <p class="meta">{auteur.data.role} · {auteur.data.ville}</p>
+        <p>{auteur.data.bio}</p>
+      </div>
+    </aside>
+  </article>
+</Base>
+
+<style>
+  h1 { font-size: clamp(1.8rem, 4.5vw, 2.6rem); margin: 12px 0; }
+  .chapo { font-size: 1.2rem; color: var(--muted); margin: 0 0 12px; }
+  .corps { margin-top: 32px; font-size: 1.08rem; }
+  .corps :global(h2) { margin-top: 2em; }
+  .encart {
+    display: flex;
+    gap: 16px;
+    margin-top: 48px;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .encart p { margin: 0 0 4px; }
+  .nom { font-weight: 700; }
+</style>

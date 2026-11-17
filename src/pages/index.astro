@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import CarteArticle from '../components/CarteArticle.astro';
+import { articlesTries } from '../utils';
+
+const articles = await articlesTries();
+---
+
+<Base titre="Au fil de la pagaie">
+  <div class="conteneur">
+    <section class="intro">
+      <h1>Au fil de la pagaie</h1>
+      <p>Technique, itinéraires, matériel et bivouac : des kayakistes partagent ce qu'ils ont appris sur l'eau.</p>
+    </section>
+    <h2>Derniers articles</h2>
+    <ul class="grille">
+      {articles.map((article) => <CarteArticle article={article} />)}
+    </ul>
+  </div>
+</Base>
+
+<style>
+  .intro { margin-bottom: 40px; }
+  .intro h1 { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 8px; }
+  .intro p { color: var(--muted); font-size: 1.15rem; max-width: 600px; margin: 0; }
+</style>
