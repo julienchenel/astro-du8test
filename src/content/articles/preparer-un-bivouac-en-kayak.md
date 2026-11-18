@@ -1,9 +1,12 @@
 ---
-titre: Préparer un bivouac en kayak
+titre: Préparer un bivouac en kayaks
 resume: Ce qu'il faut emporter, comment charger le bateau et où dormir pour une première randonnée de deux jours.
 date: 2026-07-08
 auteur: sofia-benali
-tags: [randonnée, bivouac, matériel]
+tags:
+  - randonnée
+  - bivouac
+  - matériel
 dureeLecture: 9
 ---
 
