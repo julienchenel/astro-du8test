@@ -1,9 +1,12 @@
 ---
 titre: Apprendre à lire une rivière
-resume: Contre-courants, drossages, rappels... Savoir repérer les pièges de l'eau vive depuis la berge.
+resume: Contre-courasnts, drossages, rappels... Savoir repérer les pièges de l'eau vive depuis la berge.
 date: 2026-05-20
 auteur: julien-garnier
-tags: [eau vive, sécurité, technique]
+tags:
+  - eau vive
+  - sécurité
+  - technique
 dureeLecture: 8
 ---
 
