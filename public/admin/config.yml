@@ -6,7 +6,7 @@
 #   les fichiers du dossier du projet (Chrome ou Edge).
 backend:
   name: github
-  repo: julienchenel/astro-du8test
+  repo: julienchenel/astro-test
   branch: main
   commit_messages:
     create: 'Créer {{collection}} « {{slug}} »'
@@ -15,12 +15,12 @@ backend:
     uploadMedia: 'Ajouter le média « {{path}} »'
     deleteMedia: 'Supprimer le média « {{path}} »'
 
-site_url: https://julienchenel.github.io/astro-du8test/
+site_url: https://julienchenel.github.io/astro-test/
 
 locale: fr
 
 media_folder: public/images
-public_folder: /astro-du8test/images
+public_folder: /astro-test/images
 
 collections:
   - name: articles

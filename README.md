@@ -19,7 +19,7 @@ npm install
 npm run dev
 ```
 
-Le site est alors sur http://localhost:4321/astro-du8test/.
+Le site est alors sur http://localhost:4321/astro-test/.
 
 ## Écrire des articles avec Sveltia CMS
 
@@ -29,9 +29,9 @@ Sa configuration est dans `public/admin/config.yml`.
 
 ### En ligne
 
-1. Ouvre https://julienchenel.github.io/astro-du8test/admin/
+1. Ouvre https://julienchenel.github.io/astro-test/admin/
 2. Choisis **Sign In with Token** et colle un jeton d'accès personnel GitHub :
-   un *fine-grained token* limité au dépôt `astro-du8test`, avec la permission
+   un *fine-grained token* limité au dépôt `astro-test`, avec la permission
    **Contents : Read and write**.
 3. Chaque enregistrement crée un commit sur `main`, ce qui republie le site
    en une à deux minutes.
@@ -40,7 +40,7 @@ Le jeton reste dans ton navigateur. Ne le partage pas et donne-lui une date d'ex
 
 ### En local
 
-Avec `npm run dev` lancé, ouvre http://localhost:4321/astro-du8test/admin/index.html
+Avec `npm run dev` lancé, ouvre http://localhost:4321/astro-test/admin/index.html
 dans Chrome ou Edge, choisis **Work with Local Repository** et sélectionne le
 dossier du projet. Les fichiers sont modifiés directement sur le disque ;
 publie-les ensuite avec un commit et un push.

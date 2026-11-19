@@ -19,7 +19,7 @@ export function initiales(nom: string): string {
     .toUpperCase();
 }
 
-/** Préfixe un chemin interne avec la base du site (ex. /astro-du8test/ sur GitHub Pages). */
+/** Préfixe un chemin interne avec la base du site (ex. /astro-test/ sur GitHub Pages). */
 export function lien(chemin: string): string {
   const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   return `${base}${chemin}`;
