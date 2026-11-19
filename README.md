@@ -1,7 +1,7 @@
 # Au fil de la pagaie
 
 Blog sur le kayak construit avec [Astro](https://astro.build), publié sur GitHub Pages :
-https://julienchenel.github.io/astro-du8test/
+https://julienchenel.github.io/astro-test/
 
 ## Contenu
 
